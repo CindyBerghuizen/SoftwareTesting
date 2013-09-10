@@ -126,7 +126,21 @@ equiv a b = all (\ v -> eval v f) (allVals f) where f = (Equiv a b)
 
 \end{code}
 
-XXX
+Testing can be done by inserting propositions which we have already validated by hand.
+formC is a contradiction, formT is a tautology and formS is a proposition which is satisfiable.
+For equiv we can check DeMorgan Law's because we already know they are equivalant. DeMorgan can also be used for the entails function. Because if $ \leftrightarrow $ holds than $ \rightarrow $ will also hold.
+
+\begin{code}
+formC =  Cnj[p, (Neg p)]
+formT = Equiv (Impl p q)(Impl (Neg q)(Neg p))
+formS = Dsj[p, (Neg q)]
+deMorgan1 = Neg (Cnj[p,q])
+deMorgan2 = Dsj[Neg p, Neg q]
+deMorgan3 = Neg (Dsj[p,q])
+deMorgan4 = Cnj[Neg p, Neg q]
+\end{code}
+
+\includegraphics{Knipsel3}
 
 \section*{Conjunctive Normal Form (CNF)}
 
