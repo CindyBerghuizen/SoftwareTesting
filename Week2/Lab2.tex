@@ -163,5 +163,22 @@ The results are stated in the picture below and are verified by hand.
 
 \includegraphics{Knipsel2}
 
+To get the supplied formula to match with the pre-condition for 'cnf', we chain the 'arrowfree' and 'nnf' functions from Week2.hs:
+\textbf{arrowfree}
+\begin{description}
+  \item[Pre-condition] \hfill \\
+  Any formula.
+  \item[Post-condition] \hfill \\
+  A formula with the arrows (-> and <==>) replaced with disjunctions.
+\end{description}
+
+\textbf{nnf}
+\begin{description}
+  \item[Pre-condition] \hfill \\
+  Arrow free formula.
+  \item[Post-condition] \hfill \\
+  Negative normal form of the arrow free formula.
+\end{description}
+The combination of 'arrowfree' and 'nnf' gives us a pre-condition where any formula can be used and a post-condition of an arrow free, negative normal formula which is what we need in our 'cnf' function.
 
 \end{document}
