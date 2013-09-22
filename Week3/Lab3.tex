@@ -226,6 +226,20 @@ parseCNF :: String -> [Form]
 parseCNF s = [ f | (f,_) <- parseCNFForm 0 (lexer s) ]
 \end{code}
 
+\section*{Exercise 8 (Bonus Exercise)}
+We created a parser for first order logic as it was described in Week3.hs
+with a small change in the case of infix operator ``$==$''. We changed $show$
+to put the operator and its terms in parenthesis exactly as ``$ = = > $'' and
+``$ < = >$'' are expressed. The function $testFOL$ uses the random Fomula
+generator to acquire a Formula and then tests it with the parser. The argument
+of $testFOL$ is the depth of $getRandomFormula$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{FOLparser.jpg}
+\caption{$testFOL$}
+\label{fig:tstFOL}
+\end{figure}
 
 
 \end{document}
