@@ -33,7 +33,7 @@ isPermutation :: Eq a => [a] -> [a] -> Bool
 isPermutation [] [] = True
 isPermutation [] _ = False
 isPermutation (x:xs) y | elem x y = isPermutation xs (delete x y)
- | otherwise = False
+					   | otherwise = False
 
 
 --Exercise 5
@@ -59,9 +59,34 @@ testPermutationsTotal c = do
 
 
 --Exercise 6
-testCNF n = do
+showCNFResults n = do
+ r <- (testCNFs n)
+ return ("Correct CNF forms: "++(show (length (filter ((==) True) r)))++" out of "++(show (length r)))
+
+testCNFs n = do
  g <- (getRandomFs n)
- return (map ( \x -> equiv (x) (cnf (nnf x))) g)
+ return (map ( \x -> testCNF x) g)
+ 
+testCNF f = (equiv f g) && ((parseCNF (formToString g))/=[]) where g = (cnf (nnf f))
+ 
+formToString :: Form -> String
+formToString form = show form
+
+parseCNFForm :: Int->(Parser Token Form) 
+parseCNFForm i (TokenInt x: tokens) = [(Prop x,tokens)]
+parseCNFForm i (TokenNeg: TokenInt x : tokens) = [ (Week2.Neg (Prop x), tokens) ] --
+parseCNFForm i (TokenCnj : TokenOP : tokens) | i==0 = [ (Dsj fs, rest) | (fs,rest) <- parseCNFForms i tokens ]
+											 | otherwise = []
+parseCNFForm i (TokenDsj : TokenOP : tokens) = [ (Cnj fs, rest) | (fs,rest) <- parseCNFForms (i+1) tokens ]
+parseCNFForm i tokens = []
+
+parseCNFForms :: Int-> (Parser Token [Form]) 
+parseCNFForms i (TokenCP : tokens) = succeed [] tokens
+parseCNFForms i tokens = [(f:fs, rest) | (f,ys) <- parseCNFForm i tokens, (fs,rest) <- parseCNFForms i ys ]
+
+parseCNF :: String -> [Form]
+parseCNF s = [ f | (f,_) <- parseCNFForm 0 (lexer s) ]
+
 
 
 --Exercise 7
