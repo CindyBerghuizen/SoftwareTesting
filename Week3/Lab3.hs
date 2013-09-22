@@ -186,15 +186,15 @@ getRandomTerm d = do
 --Exercise 8 (Bonus Exercise)
 --We assume that the predicate equal is surrounded by parentheses
 
-data TokenF = TokenFName Name
+data TokenF = TokenFName Week3.Name
 			  | TokenFEq
 			  | TokenFNeg
 			  | TokenFImpl
 			  | TokenFEqui
 			  | TokenFConj
 			  | TokenFDisj
-			  | TokenFForall Name
-			  | TokenFExists Name
+			  | TokenFForall Week3.Name
+			  | TokenFExists Week3.Name
 			  | TokenFOP
 			  | TokenFCP
 			  | TokenFOL
