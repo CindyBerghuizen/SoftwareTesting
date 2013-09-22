@@ -186,15 +186,15 @@ getRandomTerm d = do
 --Exercise 8 (Bonus Exercise)
 --We assume that the predicate equal is surrounded by parentheses
 
-data TokenF = TokenFName String
+data TokenF = TokenFName Name
 			  | TokenFEq
 			  | TokenFNeg
 			  | TokenFImpl
 			  | TokenFEqui
 			  | TokenFConj
 			  | TokenFDisj
-			  | TokenFForall String
-			  | TokenFExists String
+			  | TokenFForall Name
+			  | TokenFExists Name
 			  | TokenFOP
 			  | TokenFCP
 			  | TokenFOL
