@@ -184,6 +184,7 @@ getRandomTerm d = do
    return (F (show (chr (102+m))) ts)
 
 --Exercise 8 (Bonus Exercise)
+--We assume that the predicate equal is surrounded by parentheses
 
 data TokenF = TokenFName String
 			  | TokenFEq
