@@ -182,3 +182,132 @@ getRandomTerm d = do
    n <- getRandomInt nTerms
    ts <- getRandomTerms (d-1) n
    return (F (show (chr (102+m))) ts)
+
+--Exercise 8 (Bonus Exercise)
+
+data TokenF = TokenFName String
+			  | TokenFEq
+			  | TokenFNeg
+			  | TokenFImpl
+			  | TokenFEqui
+			  | TokenFConj
+			  | TokenFDisj
+			  | TokenFForall String
+			  | TokenFExists String
+			  | TokenFOP
+			  | TokenFCP
+			  | TokenFOL
+			  | TokenFCL
+			  | TokenFTrue
+			  | TokenFFalse
+              deriving (Eq,Show)
+			  
+--Convert Formula to String
+formulaToString :: Formula -> String
+formulaToString formula = show formula
+
+--Remove spaces
+removeSpace [] = []
+removeSpace (c:cs) | c == ' ' = removeSpace cs
+				   | otherwise = (c:cs)
+				   
+--Get strings between (')
+getNameToken xs ('\'':rest) = ( xs,rest)
+getNameToken xs (c:rest) = getNameToken (append c xs) rest
+getNameToken xs [] = ([],[])
+
+append x [] = [x]
+append x (y:ys) = (y:(append x ys))
+				   
+--Token with arguments
+lexFName:: String -> [TokenF]
+lexFName cs = (TokenFName c) : lexerFOL rest
+      where (c,rest) = getNameToken [] cs
+
+lexFNum:: String -> [TokenF]
+lexFNum cs = (TokenFName  num) : lexerFOL rest
+  where (num,rest) = span isAlphaNum cs
+  
+lexFExists:: String -> [TokenF]
+lexFExists cs = (TokenFExists  num) : lexerFOL rest
+  where (num,rest) = span isAlphaNum cs
+	
+lexFForall:: String -> [TokenF]
+lexFForall cs = (TokenFForall  num) : lexerFOL rest
+  where (num,rest) = span isAlphaNum cs
+  
+--Lexer for FOL
+lexerFOL :: String -> [TokenF]
+lexerFOL [] = []
+lexerFOL (c:cs) | isSpace c = lexerFOL cs
+				| c == ',' = lexerFOL cs
+				| c == 'A' = lexFForall (removeSpace cs)
+				| c == 'E' = lexFExists (removeSpace cs)
+				| isDigit c = lexFNum (c:cs)
+                | c == '\'' = lexFName cs 
+lexerFOL ('(':cs) = TokenFOP : lexerFOL cs
+lexerFOL (')':cs) = TokenFCP : lexerFOL cs
+lexerFOL ('[':cs) = TokenFOL : lexerFOL cs
+lexerFOL (']':cs) = TokenFCL : lexerFOL cs
+lexerFOL ('c':'o':'n':'j':cs) = TokenFConj : lexerFOL cs
+lexerFOL ('d':'i':'s':'j':cs) = TokenFDisj : lexerFOL cs
+lexerFOL ('~':cs) = TokenFNeg : lexerFOL cs 
+lexerFOL ('t':'r':'u':'e':cs) = TokenFTrue : lexerFOL cs
+lexerFOL ('f':'a':'l':'s':'e':cs) = TokenFFalse : lexerFOL cs
+lexerFOL ('=':'=':'>':cs) = TokenFImpl : lexerFOL cs
+lexerFOL ('=':'=':cs) = TokenFEq : lexerFOL cs 
+lexerFOL ('<':'=':'>':cs) = TokenFEqui : lexerFOL cs
+lexerFOL (x:_) = error ("unknown token: " ++ [x])
+
+--Parse Terms
+parseTerm :: Parser TokenF Term
+parseTerm (TokenFName x: TokenFOL: tokens) = [(F x fs, rest) | (fs,rest) <- parseTerms tokens]
+parseTerm (TokenFName x : tokens) = [(V x, tokens)]
+parseTerm tokens = []
+
+parseTerms :: Parser TokenF [Term] 
+parseTerms (TokenFCL : tokens) = succeed [] tokens
+parseTerms tokens = [(f:fs, rest) | (f,ys) <- parseTerm tokens, (fs,rest) <- parseTerms ys ]
+  
+--Parse Formulas
+parseFormula :: Parser TokenF Formula 
+parseFormula (TokenFName x: TokenFOL: tokens) = [(Atom x fs, rest) | (fs,rest) <- parseTerms tokens]
+parseFormula (TokenFName x : tokens) = [(Atom x [], tokens)]
+parseFormula (TokenFTrue : tokens) = [(Conj [], tokens)]
+parseFormula (TokenFFalse : tokens) = [(Disj [], tokens)]
+parseFormula (TokenFNeg : tokens) = [ (Week3.Neg f, rest) | (f,rest) <- parseFormula tokens ]
+parseFormula (TokenFConj : TokenFOL : tokens) = [ (Conj fs, rest) | (fs,rest) <- parseFormulas tokens ]
+parseFormula (TokenFDisj : TokenFOL : tokens) = [ (Disj fs, rest) | (fs,rest) <- parseFormulas tokens ]
+parseFormula (TokenFOP : tokens) = [ (Week3.Impl f1 f2, rest) | (f1,ys) <- parseFormula tokens, (f2,rest) <- parseFImpl ys ] ++ [ (Equi f1 f2, rest) | (f1,ys) <- parseFormula tokens, (f2,rest) <- parseFEqui ys ] ++ [ (Eq f1 f2, rest) | (f1,ys) <- parseTerm tokens, (f2,rest) <- parseFEq ys ]
+parseFormula (TokenFForall x: tokens) = [ (Forall x f, rest) | (f,rest) <- parseFormula tokens]
+parseFormula (TokenFExists x: tokens) = [ (Exists x f, rest) | (f,rest) <- parseFormula tokens]
+parseFormula tokens = []
+
+parseFormulas :: Parser TokenF [Formula] 
+parseFormulas (TokenFCL : tokens) = succeed [] tokens
+parseFormulas tokens = [(f:fs, rest) | (f,ys) <- parseFormula tokens, (fs,rest) <- parseFormulas ys ]
+
+--Parse infix operators
+parseFImpl :: Parser TokenF Formula
+parseFImpl (TokenFImpl : tokens) = [ (f,ys) | (f,y:ys) <- parseFormula tokens, y == TokenFCP ]
+parseFImpl tokens = []
+
+
+parseFEqui :: Parser TokenF Formula
+parseFEqui (TokenFEqui : tokens) = [ (f,ys) | (f,y:ys) <- parseFormula tokens, y == TokenFCP ]
+parseFEqui tokens = []
+
+parseFEq :: Parser TokenF Term
+parseFEq (TokenFEq : tokens) = [ (f,ys) | (f,y:ys) <- parseTerm tokens, y == TokenFCP ]
+parseFEq tokens = []
+
+parseF :: String -> [Formula]
+parseF s = [ f | (f,_) <- parseFormula (lexerFOL s) ]
+
+testFOL n = do
+ g <- getRandomFormula n
+ return (parseF (formulaToString g))
+
+
+
+

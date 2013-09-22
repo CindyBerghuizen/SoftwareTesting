@@ -43,7 +43,7 @@ data Formula = Atom Name [Term]
 instance Show Formula where 
   show (Atom s [])   = s
   show (Atom s xs)   = s ++ show xs 
-  show (Eq t1 t2)    = show t1 ++ "==" ++ show t2
+  show (Eq t1 t2)    = "(" ++ (show t1) ++ "==" ++ (show t2) ++ ")"
   show (Neg form)    = '~' : (show form)
   show (Impl f1 f2)  = "(" ++ show f1 ++ "==>" 
                            ++ show f2 ++ ")"
