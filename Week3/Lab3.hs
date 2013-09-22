@@ -59,19 +59,25 @@ testPermutationsTotal c = do
 
 
 --Exercise 6
+
+--Return the successful CNF conversions
 showCNFResults n = do
  r <- (testCNFs n)
  return ("Correct CNF forms: "++(show (length (filter ((==) True) r)))++" out of "++(show (length r)))
 
+--Return a list of boolean values, which represent if the CNF conversion of random forms was successful
 testCNFs n = do
  g <- (getRandomFs n)
  return (map ( \x -> testCNF x) g)
  
+--Test if the cnf conversion of f is successful
 testCNF f = (equiv f g) && ((parseCNF (formToString g))/=[]) where g = (cnf (nnf f))
  
+--Convert a Form to String
 formToString :: Form -> String
 formToString form = show form
 
+--CNF parser
 parseCNFForm :: Int->(Parser Token Form) 
 parseCNFForm i (TokenInt x: tokens) = [(Prop x,tokens)]
 parseCNFForm i (TokenNeg: TokenInt x : tokens) = [ (Week2.Neg (Prop x), tokens) ] --
@@ -140,11 +146,11 @@ getRandomFormula d = do
   5 -> do
    m <- getRandomInt nVariables
    f <- getRandomFormula (d-1)
-   return (Forall (show (chr(97+m))) f)
+   return (Forall (show (m+1)) f)
   6 -> do
    m <- getRandomInt nVariables
    f <- getRandomFormula (d-1)
-   return (Exists (show (chr(97+m))) f)
+   return (Exists (show (m+1)) f)
   7 -> do
    f1 <- getRandomFormula (d-1)
    f2 <- getRandomFormula (d-1)
