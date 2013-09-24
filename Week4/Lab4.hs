@@ -10,8 +10,7 @@ import Techniques
 genSetMax = 100
 genSetMaxEntries = 10
 
--- Set Int = Set [Int]
---still makes duplicates
+-- EXERCISE 2
 genSet :: IO (Set Int)
 genSet =  do
    n  <- getRandomInt genSetMaxEntries
@@ -25,8 +24,7 @@ genSet' d c = do
          ns <- genSet' d (c-1)
          return (insertSet n ns)
 
---Exercise 3
- -- 14:00 - 15:45
+--EXERCISE 3
  -- Pre: no duplicates, it is sorted
  -- Post: no duplicates, it is sorted 
 intersectSet :: (Ord a) => Set a -> Set a -> Set a 
@@ -35,18 +33,14 @@ intersectSet (Set (x:xs)) set2  | inSet x set2 = insertSet x (intersectSet (Set 
                                 | otherwise = (intersectSet (Set xs) set2)
 
 -- Pre: no duplicates, it is sorted
- -- Post: no duplicates, it is sorted 
+-- Post: no duplicates, it is sorted 
 differenceSet :: (Ord a) => Set a -> Set a -> Set a
 differenceSet (Set [])     set2  =  (Set [])
 differenceSet (Set (x:xs)) set2  | inSet x set2 = (differenceSet (Set xs) set2)
                                  | otherwise = insertSet x (differenceSet (Set xs) set2)                             
 
 
--- Pre: no duplicates, they are sorted 
--- Post : Bool
--- intersectionset C is the subset of A and B 
--- with our without prepSets, I don't care      
--- A set i is an intersection of a and b if i is an subset of a and a subset of b    
+-- PROPERTY: A set I is an intersection of A and B if I is an subset of A and B 
 testIntersect :: (Ord a) => Set a -> Set a -> Set a -> Bool
 testIntersect a b i = subSet i a && subSet i b
 
@@ -68,10 +62,7 @@ generateIntersectionTest c = do
     ps <- automatedI' c
     return ("All Checks Valid: " ++ (show (all (\x -> x) ps)))
 
--- Pre: no duplicates, they are sorted 
--- Post : Bool
--- with our without prepSets, I don't care   
--- An set d is the difference of a and b if it is an subset of a and has no elements in common with b                        
+-- PROPERTY: An set D is the difference of A and B if it is an subset of A and has no elements in common with B                        
 testDifference :: (Ord a) => Set a -> Set a -> Set a -> Bool
 testDifference a b d = subSet d a && noElement d b
 
@@ -98,13 +89,27 @@ generateDifferenceTest c = do
     ps <- automatedD' c
     return ("All Checks Valid: " ++ (show (all (\x -> x) ps)))
 
+--PROPERTY : Every element in either of the sets should be an element of the union
+testUnion :: Int -> IO [Bool]
+testUnion 0 = return []
+testUnion a = do 	n <- testUnion1
+			ns <- testUnion (a-1)			
+			return(n : ns)
+
+testUnion1 :: IO Bool
+testUnion1 = do 	n <- randomIntSet
+			m <- randomIntSet
+			return(isElementOf n m (unionSet n m)) 
+
+isElementOf :: (Ord a) => Set a -> Set a -> Set a -> Bool
+isElementOf (Set a) (Set b) (Set c) = all (\x -> elem x c) (a++b)
+
 -- To prepare the sets by removing duplicates and sort them, if needed
 prepSets :: (Ord a) => Set a -> Set a 
 prepSets (Set xs) = Set (sort (nub xs))
 
 
--- Exercise 4
--- 15:45                              
+-- EXERCISE 4                           
 type Rel a = [(a,a)]
 infixr 5 @@
 
@@ -116,13 +121,42 @@ r @@ s =
 trClos :: (Ord a) => Rel a -> Rel a
 trClos x = trClos2 x []
 
---THERE I FIXed IT!
-
+-- If the closure n+1 is a subset of n than all closures are found
+-- because no new elements were found
 trClos2 :: (Ord a) => Rel a -> Rel a -> Rel a
 trClos2  = fix (\ f x y ->
            if subSet (list2set x) (list2set y) then (nub x)
            else f ((x @@ x)++x) x) 
-            
+
+
+
+
+--EXERCISE 5
+--Property: If two tuples exists of the form (x,y) (y,z) then (x,z) must also be in the set
+-- Two input parameters should be the same set so testTrClos set1 set1
+
+testTrClos :: (Ord a) => Rel a -> Rel a -> Bool
+testTrClos [] _ = True
+testTrClos (x:xs) z = (all (\y -> elem y z) ([x] @@ z)) && (testTrClos xs z)
+
+--RANDOM TESTING
+randomTestsTrClos :: Int -> IO [Bool]
+randomTestsTrClos 0 = return []
+randomTestsTrClos a = do 	n <- randomTestTrClos
+				m <- randomTestsTrClos (a-1)
+				return (n:m)
+
+randomTestTrClos :: IO Bool
+randomTestTrClos = do 	n <- randomRelation maxSize
+			return( testTrClos (trClos n) (trClos n)) 
+
+randomRelation :: (Eq a, Num a) => a -> IO [(Int,Int)]
+randomRelation 0 = return []
+randomRelation a = do 	n <- getRandomInt range
+			m <- getRandomInt range
+			l <- randomRelation (a-1)
+			return((n,m):l) 
+           
 
 
    
