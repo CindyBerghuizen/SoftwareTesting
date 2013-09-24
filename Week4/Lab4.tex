@@ -203,6 +203,9 @@ testUnion1 = do 	n <- randomIntSet
 isElementOf :: (Ord a) => Set a -> Set a -> Set a -> Bool
 isElementOf (Set a) (Set b) (Set c) = all (\x -> elem x c) (a++b)
 \end{code}
+
+\includegraphics{knipsel}
+
 \newpage
 Time spent: 75 minutes
 
@@ -247,7 +250,7 @@ randomRelation a = do 	n <- getRandomInt range
 
 \end{code}
 
-\subsection*{Test report}
+\includegraphics{knipsel2}
 
 Time spent: 2 hours
 

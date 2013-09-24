@@ -7,14 +7,14 @@ import Data.List
 import SetOrd
 import Techniques
 
-genSetMax = 100
-genSetMaxEntries = 10
+range = 10
+maxSize = 10
 
 -- EXERCISE 2
 genSet :: IO (Set Int)
 genSet =  do
-   n  <- getRandomInt genSetMaxEntries
-   ns <- genSet' genSetMax n
+   n  <- getRandomInt maxSize
+   ns <- genSet' range n
    return ns
 
 genSet' :: (Eq a, Num a) => Int -> a -> IO (Set Int)
@@ -92,13 +92,15 @@ generateDifferenceTest c = do
 --PROPERTY : Every element in either of the sets should be an element of the union
 testUnion :: Int -> IO [Bool]
 testUnion 0 = return []
-testUnion a = do 	n <- testUnion1
+testUnion a = do 	
+            n <- testUnion1
 			ns <- testUnion (a-1)			
 			return(n : ns)
 
 testUnion1 :: IO Bool
-testUnion1 = do 	n <- randomIntSet
-			m <- randomIntSet
+testUnion1 = do 	
+            n <- genSet
+			m <- genSet
 			return(isElementOf n m (unionSet n m)) 
 
 isElementOf :: (Ord a) => Set a -> Set a -> Set a -> Bool
