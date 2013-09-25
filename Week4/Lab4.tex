@@ -130,7 +130,13 @@ differenceSet (Set (x:xs)) set2  | inSet x set2 = (differenceSet (Set xs) set2)
 --Union is already implemented in SetOrd.hs
 \end{code}
 
+Union was already implemented in SetOrd.hs\\
+
 \subsection*{Intersection Test}
+
+Property: A set I is an intersection of sets A and B if the elements of I are in A and B.
+$ A \cap B := \left\{ x: x \in A \land x \in B\right\} $ \\
+
 \begin{code}
 -- A set I is an intersection of A and B if I is an subset of A and B 
 testIntersect :: (Ord a) => Set a -> Set a -> Set a -> Bool
@@ -156,6 +162,9 @@ generateIntersectionTest c = do
 \end{code}
 
 \subsection*{Difference Test}
+An set D is the difference of A and B if its element are in A and it has no elements in common with B.
+$ A \setminus B := \left\{ x: x \in A \land x \not \in B\right\} $ \\
+
 \begin{code}
 -- Property: An set D is the difference of A and B if it is an subset
 --  of A and has no elements in common with B                        
@@ -187,6 +196,10 @@ generateDifferenceTest c = do
 \end{code}
 
 \subsection*{Union Test}
+
+Every element in either of the sets should be an element of the union set.
+$ A \cup B := \left\{ x: x \in A \lor x \in B\right\} $ \\
+
 \begin{code}
 --PROPERTY : Every element in either of the sets should be an element of the union
 testUnion :: Int -> IO [Bool]
@@ -225,6 +238,8 @@ trClos2  = fix (\ f x y ->
 Time spent: 1.5 hours
 
 \section*{Testing Closure}
+
+
 \begin{code}
 testTrClos :: (Ord a) => Rel a -> Rel a -> Bool
 testTrClos [] _ = True

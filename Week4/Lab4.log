@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.4.29)  24 SEP 2013 12:23
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.4.29)  25 SEP 2013 20:00
 entering extended mode
 **C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/Lab4.tex
 (C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/Lab4.tex
@@ -128,39 +128,64 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 89.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <7> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 99.
- [1
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 138.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 138.
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--139
+
+ []
+
+[1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<knipsel.jpg, id=10, 454.69875pt x 82.80937pt>
+Underfull \hbox (badness 10000) in paragraph at lines 165--167
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 200--202
+
+ []
+
+[2] <knipsel.jpg, id=15, 454.69875pt x 82.80937pt>
 File: knipsel.jpg Graphic file (type jpg)
- <use knipsel.jpg> [2 <C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/kn
+ <use knipsel.jpg> [3 <C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/kn
 ipsel.jpg>]
-<knipsel2.jpg, id=14, 474.27188pt x 28.60687pt>
+<knipsel2.jpg, id=19, 474.27188pt x 28.60687pt>
 File: knipsel2.jpg Graphic file (type jpg)
  <use knipsel2.jpg>
-Overfull \hbox (4.5157pt too wide) in paragraph at lines 253--254
+Overfull \hbox (4.5157pt too wide) in paragraph at lines 268--269
 [][] 
  []
 
-[3 <C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/knipsel2.jpg>]
+[4 <C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/knipsel2.jpg>]
 (C:\Users\Cindy\Documents\GitHub\SoftwareTesting\Week4\Lab4.aux) ) 
 Here is how much of TeX's memory you used:
- 2624 strings out of 494053
- 35647 string characters out of 3148603
- 138425 words of memory out of 3000000
- 5936 multiletter control sequences out of 15000+200000
+ 2626 strings out of 494053
+ 35675 string characters out of 3148603
+ 142404 words of memory out of 3000000
+ 5938 multiletter control sequences out of 15000+200000
  7923 words of font info for 29 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 27i,6n,35p,235b,1531s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 26i,6n,35p,235b,1527s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program F
 iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmtt8.pfb>
-Output written on Lab4.pdf (3 pages, 106575 bytes).
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
+8.pfb>
+Output written on Lab4.pdf (4 pages, 129743 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
+ 45 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
