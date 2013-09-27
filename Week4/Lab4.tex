@@ -133,9 +133,12 @@ differenceSet (Set (x:xs)) set2  | inSet x set2 = (differenceSet (Set xs) set2)
 Union was already implemented in SetOrd.hs\\
 
 \subsection*{Intersection Test}
-
+The property of an Intersection set is the following: \\
+\emph{
 Property: A set I is an intersection of sets A and B if the elements of I are in A and B.
-$ A \cap B := \left\{ x: x \in A \land x \in B\right\} $ \\
+$ A \cap B := \left\{ x: x \in A \land x \in B\right\} $ \\}
+
+We test by calling function automatedI. This function generates two random sets and calculates the intersection of those sets. To see if the intersection set indeed is the intersection of A and B we check if it is an subset of A and a subset of B in the function testIntersect. This function returns True is that is the case. The function generateIntersectionTest is used to test multiple cases, this function returns True if all testcases return True.
 
 \begin{code}
 -- A set I is an intersection of A and B if I is an subset of A and B 
@@ -162,8 +165,14 @@ generateIntersectionTest c = do
 \end{code}
 
 \subsection*{Difference Test}
-An set D is the difference of A and B if its element are in A and it has no elements in common with B.
-$ A \setminus B := \left\{ x: x \in A \land x \not \in B\right\} $ \\
+The property from a Difference set is the following:\\
+ \emph{
+An set D is the difference of A and B if its element are in A and it has no elements in common with B. Also written as:
+$ A \setminus B := \left\{ x: x \in A \land x \not \in B\right\} $ }\\
+
+The testing is done by inserting two random sets in the function automatedD and calculating the difference of those two sets. Next, we will check that the differenceset is indeed a subset of set A and that the difference set has no elements in common with set B. If this is the case the differenceSet is correct and the function automatedD will return True. 
+
+For testing multiple sets we can make use of the function generateDifferenceTest. This will result in True if all the testcases return true in atomatedD.
 
 \begin{code}
 -- Property: An set D is the difference of A and B if it is an subset
@@ -196,9 +205,11 @@ generateDifferenceTest c = do
 \end{code}
 
 \subsection*{Union Test}
-
+The property to test of a union set is the following: \\ \emph{
 Every element in either of the sets should be an element of the union set.
-$ A \cup B := \left\{ x: x \in A \lor x \in B\right\} $ \\
+$ A \cup B := \left\{ x: x \in A \lor x \in B\right\} $ }\\
+
+To test this we use the function isElementOf. isElementOf gets a set A, a set B and the presumable union set of A and B. It then tests if every element in the unionset is an element in set A or in set B. If this is the case the function will return True. To check multiple cases testUnion can be used. This returns the list of all the results of the test cases.
 
 \begin{code}
 --PROPERTY : Every element in either of the sets should be an element of the union
@@ -238,7 +249,11 @@ trClos2  = fix (\ f x y ->
 Time spent: 1.5 hours
 
 \section*{Testing Closure}
+For testing the closure we use the following property: \\
+\emph{If the relations (x,y) and (y,z) exist in a transitiveclosure, then the relation (x,z) should exist in the transitive closure set. This can also be written as: \\
+$\left\{ (x,y) , (y,z) \in R^+ \rightarrow(x,z) \in R^+ \right\}$}\\
 
+The function testTrClos gets two relations for the input. These inputs should be the same. The function testTrClos checks if the ??????
 
 \begin{code}
 testTrClos :: (Ord a) => Rel a -> Rel a -> Bool

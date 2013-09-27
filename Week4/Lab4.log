@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.4.29)  25 SEP 2013 20:00
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2011.4.29)  27 SEP 2013 14:44
 entering extended mode
 **C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/Lab4.tex
 (C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/Lab4.tex
@@ -134,58 +134,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--134
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 138.
+(Font)              <7> on input line 139.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 138.
+(Font)              <5> on input line 139.
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--139
+Underfull \hbox (badness 10000) in paragraph at lines 136--140
 
  []
 
 [1
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 165--167
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 200--202
-
- []
-
-[2] <knipsel.jpg, id=15, 454.69875pt x 82.80937pt>
-File: knipsel.jpg Graphic file (type jpg)
- <use knipsel.jpg> [3 <C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/kn
-ipsel.jpg>]
-<knipsel2.jpg, id=19, 474.27188pt x 28.60687pt>
-File: knipsel2.jpg Graphic file (type jpg)
- <use knipsel2.jpg>
-Overfull \hbox (4.5157pt too wide) in paragraph at lines 268--269
-[][] 
- []
-
-[4 <C:/Users/Cindy/Documents/GitHub/SoftwareTesting/Week4/knipsel2.jpg>]
-(C:\Users\Cindy\Documents\GitHub\SoftwareTesting\Week4\Lab4.aux) ) 
-Here is how much of TeX's memory you used:
- 2626 strings out of 494053
- 35675 string characters out of 3148603
- 142404 words of memory out of 3000000
- 5938 multiletter control sequences out of 15000+200000
- 7923 words of font info for 29 fonts, out of 3000000 for 9000
- 715 hyphenation exceptions out of 8191
- 26i,6n,35p,235b,1527s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
-8.pfb>
-Output written on Lab4.pdf (4 pages, 129743 bytes).
-PDF statistics:
- 45 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
-
