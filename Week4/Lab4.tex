@@ -258,7 +258,8 @@ For testing the closure we use the following property: \\
 \emph{If the relations (x,y) and (y,z) exist in a transitiveclosure, then the relation (x,z) should exist in the transitive closure set. This can also be written as: \\
 $\left\{ (x,y) , (y,z) \in R^+ \rightarrow(x,z) \in R^+ \right\}$}\\
 
-The function testTrClos gets two relations for the input. These inputs should be the same. The function testTrClos checks if the ??????
+The function testTrClos tests if a relation has the transitive closure property. This could easily be tested by checking if for a relation {\em R} it holds that
+ {\em R} is equal to the transitive closure of  {\em R}. However since we are testing our function trClos we can not assume trClos gives the transitive closure. Therefore we tested the property above. The function testTrClos receives the relationship twice, it recurses over the first input and the second remains the relation itself. It checks if for every element in  {\em R} the above property holds. Then the test is randomized by first making a randomrelation function and then test if the TrClos holds for the random relations. Bigger input then 10 is also inspected however for visual purposes 10 was chosen in the graphic below.
 
 \begin{code}
 testTrClos :: (Ord a) => Rel a -> Rel a -> Bool
