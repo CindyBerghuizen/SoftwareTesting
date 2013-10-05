@@ -27,6 +27,7 @@ testTriangle s maxN = [((a, b, c), s)	| a <- [1..maxN],
 -- EXERCISE 2
 contradiction :: Form -> Bool
 contradiction f = not (satisfiable f)
+-- VVZ: could be 'contradiction = not . satisfiable
 
 tautology :: Form -> Bool
 tautology f = all (\ v -> eval v f) (allVals f)
@@ -46,6 +47,7 @@ cnf :: Form -> Form
 cnf (Prop x) = Prop x
 cnf (Neg (Prop x)) = Neg (Prop x)
 cnf (Cnj f) = Cnj (map cnf f)
+-- VVZ: empty disjunction?
 cnf (Dsj [f, g]) = dist (cnf f) (cnf g)
 cnf (Dsj (f:fs)) = dist (cnf f) (cnf (Dsj fs))
 
@@ -61,3 +63,7 @@ test1 = Neg( Neg (Neg p))
 test2 = Neg( Dsj[ p, Neg q])
 test3 = Neg( Cnj[Neg p , Neg q])
 test4 = Equiv (Impl p q) (Impl (Neg q) (Neg p))
+
+-- VVZ: You miss another function that would 'flatten' nested conjunctions and disjunctions. The formulae on the slides used associativity and hence assumed the flattener of x & (y & z) to x & y & z in the head of the reader, but in the implementation your rewritings could make quite a mess of the structure of conjunction/disjunction lists, not to mention that the input is 'any formula', so it can be already messed up.
+-- VVZ: cnf (nnf (arrowfree (Cnj [Cnj [p,q,p], q])))
+-- VVZ: I expect to see *(1 2 1 2), not *(*(1 2 1) 2)

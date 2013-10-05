@@ -10,6 +10,8 @@ import Techniques
 import Week2
 import Lab2
 
+-- VVZ: Y U use spaces and tabs in one program? YOLO-oriented programming?
+
 --Exercise 3
 genIntMax = 100
 genIntMaxEntries = 10
