@@ -29,7 +29,7 @@ mergeSrtA = assert1 (\ _ -> sorted) $ assert1 (sElements) mergeSrt
 mergeSrtSplit :: Ord a => [a] -> [a]
 mergeSrtSplit [] = []
 mergeSrtSplit [x] = [x]
-mergeSrtSplit x = merge (mergeSrtSplit (fst y)) (mergeSrtSplit (snd y)) where y = split x
+mergeSrtSplit x = merge (mergeSrtSplit y) (mergeSrtSplit z) where (y,z) = split x
 
 
 split :: [a] -> ([a],[a])
@@ -90,15 +90,4 @@ combine [] _ = [];
 combine _ [] = [];
 combine (x:xs) (y:ys) = (zip x y) ++ combine xs ys
 
-
-nrc1 :: Grid
-nrc1	 = [[0,0,0,3,0,0,0,0,0],
-            [0,0,0,7,0,0,3,0,0],
-            [2,0,0,0,0,0,0,0,8],
-            [0,0,6,0,0,5,0,0,0],
-            [0,9,1,6,0,0,0,0,0],
-            [3,0,0,0,7,1,2,0,0],
-            [0,0,0,0,0,0,0,3,1],
-            [0,8,0,0,4,0,0,0,0],
-            [0,0,2,0,0,0,0,0,0]]
 

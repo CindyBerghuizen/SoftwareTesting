@@ -2,7 +2,7 @@ module Week5NRC
 
 --CHANGES TO:
 --subGrid
---subGridSubjective
+--subgridInjective
 --Sameblock
 
 --NEW FUNCTIONS:
@@ -220,28 +220,53 @@ showDgt d = show d
 showRow :: [Value] -> IO()
 showRow [a1,a2,a3,a4,a5,a6,a7,a8,a9] = 
  do  putChar '|'         ; putChar ' '
-     putStr (showDgt a1) ; putChar ' '
+     putStr (showDgt a1) ; putChar ' '; putChar ' '
      putStr (showDgt a2) ; putChar ' '
      putStr (showDgt a3) ; putChar ' '
      putChar '|'         ; putChar ' '
-     putStr (showDgt a4) ; putChar ' '
-     putStr (showDgt a5) ; putChar ' '
+     putStr (showDgt a4) ; putChar ' '; putChar ' '
+     putStr (showDgt a5) ; putChar ' '; putChar ' '
      putStr (showDgt a6) ; putChar ' '
      putChar '|'         ; putChar ' '
      putStr (showDgt a7) ; putChar ' '
-     putStr (showDgt a8) ; putChar ' '
+     putStr (showDgt a8) ; putChar ' '; putChar ' '
+     putStr (showDgt a9) ; putChar ' '
+     putChar '|'         ; putChar '\n'
+	 
+showSRow :: [Value] -> IO()
+showSRow [a1,a2,a3,a4,a5,a6,a7,a8,a9] = 
+ do  putChar '|'         ; putChar ' '
+     putStr (showDgt a1) ; putChar ' '; putChar '|'
+     putStr (showDgt a2) ; putChar ' '
+     putStr (showDgt a3) ; putChar ' '
+     putChar '|'         ; putChar ' '
+     putStr (showDgt a4) ; putChar '|'; putChar ' '
+     putStr (showDgt a5) ; putChar ' '; putChar '|'
+     putStr (showDgt a6) ; putChar ' '
+     putChar '|'         ; putChar ' '
+     putStr (showDgt a7) ; putChar ' ' 
+     putStr (showDgt a8) ; putChar '|'; putChar ' '
      putStr (showDgt a9) ; putChar ' '
      putChar '|'         ; putChar '\n'
 
 showGrid :: Grid -> IO()
 showGrid [as,bs,cs,ds,es,fs,gs,hs,is] =
- do putStrLn ("+-------+-------+-------+")
-    showRow as; showRow bs; showRow cs
-    putStrLn ("+-------+-------+-------+")
-    showRow ds; showRow es; showRow fs
-    putStrLn ("+-------+-------+-------+")
-    showRow gs; showRow hs; showRow is
-    putStrLn ("+-------+-------+-------+")
+ do putStrLn ("+--------+---------+--------+")
+    showRow as
+    putStrLn ("|   +----|--+   +--|----+   |")
+    showSRow bs; showSRow cs
+    putStrLn ("+--------+---------+--------+")
+    showSRow ds;
+    putStrLn ("|   +----|--+   +--|----+   |")	
+    showRow es; 
+    putStrLn ("|   +----|--+   +--|----+   |")
+    showSRow fs
+    putStrLn ("+--------+---------+--------+")
+    showSRow gs; showSRow hs; 
+    putStrLn ("|   +----|--+   +--|----+   |")
+    showRow is
+    putStrLn ("+--------+---------+--------+")
+
 
 type Sudoku = (Row,Column) -> Value
 

@@ -1,0 +1,157 @@
+\documentclass{article}
+
+\usepackage{color}
+\usepackage{listings}
+\usepackage{fullpage}
+\usepackage{graphicx}
+
+\definecolor{gray_ulisses}{gray}{0.55}
+\definecolor{castanho_ulisses}{rgb}{0.71,0.33,0.14}
+\definecolor{preto_ulisses}{rgb}{0.41,0.20,0.04}
+\definecolor{green_ulises}{rgb}{0.2,0.75,0}
+
+\lstdefinelanguage{HaskellUlisses}
+{
+	basicstyle=\ttfamily\scriptsize,
+	%backgroundcolor=\color{yellow},
+	%frameshape={RYRYNYYYY}{yny}{yny}{RYRYNYYYY}, %contornos... muito nice...
+	sensitive=true,
+	morecomment=[l][\color{gray_ulisses}\scriptsize]{--},
+	morecomment=[s][\color{gray_ulisses}\scriptsize]{\{-}{-\}},
+	morestring=[b]",
+	stringstyle=\color{red},
+	showstringspaces=false,
+	numbers=none,
+	firstnumber=\thelstnumber,
+	numberstyle=\tiny,
+	numberblanklines=true,
+	showspaces=false,
+	showtabs=false,
+	xleftmargin=15pt,
+	xrightmargin=-20pt,
+	emph=
+	{[1]
+		FilePath,IOError,abs,acos,acosh,all,and,any,appendFile,approxRational,asTypeOf,asin,
+		asinh,atan,atan2,atanh,basicIORun,break,catch,ceiling,chr,compare,concat,concatMap,
+		const,cos,cosh,curry,cycle,decodeFloat,denominator,digitToInt,div,divMod,drop,
+		dropWhile,either,elem,encodeFloat,enumFrom,enumFromThen,enumFromThenTo,enumFromTo,
+		error,even,exp,exponent,fail,filter,flip,floatDigits,floatRadix,floatRange,floor,
+		fmap,foldl,foldl1,foldr,foldr1,fromDouble,fromEnum,fromInt,fromInteger,fromIntegral,
+		fromRational,fst,gcd,getChar,getContents,getLine,head,id,inRange,index,init,intToDigit,
+		interact,ioError,isAlpha,isAlphaNum,isAscii,isControl,isDenormalized,isDigit,isHexDigit,
+		isIEEE,isInfinite,isLower,isNaN,isNegativeZero,isOctDigit,isPrint,isSpace,isUpper,iterate,
+		last,lcm,length,lex,lexDigits,lexLitChar,lines,log,logBase,lookup,map,mapM,mapM_,max,
+		maxBound,maximum,maybe,min,minBound,minimum,mod,negate,not,notElem,null,numerator,odd,
+		or,ord,otherwise,pi,pred,primExitWith,print,product,properFraction,putChar,putStr,putStrLn,quot,
+		quotRem,range,rangeSize,read,readDec,readFile,readFloat,readHex,readIO,readInt,readList,readLitChar,
+		readLn,readOct,readParen,readSigned,reads,readsPrec,realToFrac,recip,rem,repeat,replicate,return,
+		reverse,round,scaleFloat,scanl,scanl1,scanr,scanr1,seq,sequence,sequence_,show,showChar,showInt,
+		showList,showLitChar,showParen,showSigned,showString,shows,showsPrec,significand,signum,sin,
+		sinh,snd,span,splitAt,sqrt,subtract,succ,sum,tail,take,takeWhile,tan,tanh,threadToIOResult,toEnum,
+		toInt,toInteger,toLower,toRational,toUpper,truncate,uncurry,undefined,unlines,until,unwords,unzip,
+		unzip3,userError,words,writeFile,zip,zip3,zipWith,zipWith3,Impl,Equiv,Prop,Neg,Cnj,Dsj
+	},
+	emphstyle={[1]\color{blue}},
+	emph=
+	{[2]
+		Bool,Char,Double,Either,Float,IO,Integer,Int,Maybe,Ordering,Rational,Ratio,ReadS,ShowS,String,NoTriangle,Equilateral,Rectangular,Isosceles,Other,Shape
+	},
+	emphstyle={[2]\color{castanho_ulisses}},
+	emph=
+	{[3]
+		case,class,data,deriving,do,else,if,import,in,infixl,infixr,instance,let,
+		module,of,primitive,then,type,where
+	},
+	emphstyle={[3]\color{preto_ulisses}\textbf},
+	emph=
+	{[4]
+		quot,rem,div,mod,elem,notElem,seq
+	},
+	emphstyle={[4]\color{castanho_ulisses}\textbf},
+	emph=
+	{[5]
+		EQ,False,GT,Just,LT,Left,Nothing,Right,True,Show,Eq,Ord,Num
+	},
+	emphstyle={[5]\color{preto_ulisses}\textbf}
+}
+
+\lstnewenvironment{code}
+{\lstset{language=HaskellUlisses}}
+{\smallskip}
+
+
+\begin{document}
+\setlength{\parindent}{0cm}
+\title{Software Testing Assignment 5}
+\author{Cindy Berghuizen, Omar Pakker, Chiel Peter,  Maria Gouseti}
+\date{\today}
+\maketitle
+
+\section*{Exercise 1}
+\subsection*{Assertion}
+A valid output of the function $mergerSrt$ would be the sorted version of the input list. In order to assert that, the postcondition should comprise of two checks:
+\begin{enumerate}
+ \item The output has exactly the same elements as the input.
+ \item The output list is sorted.
+\end{enumerate}
+
+\subsection*{Assertive version}
+\lstinputlisting[language=HaskellUlisses, firstline=14, lastline=24]{Lab5.hs}
+Time spent: 15 minutes
+
+\section*{Exercise 2}
+The $mergeSrtSplit$ function uses the function $split$ to split the list in half until it reaches either an empty list or a list with one element and then starts merging the parts of the list  with the $merge$ function.
+\lstinputlisting[language=HaskellUlisses, firstline=29, lastline=32]{Lab5.hs}
+\subsection*{Assertion}
+The assertions are the same with the assertions of the $mergerSrt$ function.
+\subsection*{Assertive version}
+\lstinputlisting[language=HaskellUlisses, firstline=41, lastline=42]{Lab5.hs}
+Time spent: 15 minutes
+
+\section*{Exercise 3}
+\subsection*{Formal statement of constraint}
+Row Constraint:\\
+$\forall i,j,k \in \{1,...,9\}$ $  j\neq k  \rightarrow grid(i,j) \neq grid(i,k)$
+
+Column Constraint:\\
+$\forall i,j,k \in \{1,...,9\}$ $ j\neq k \rightarrow  grid(j,i) \neq grid(k,i)$
+
+Grid Constraint:\\
+ $\forall x,y \in \{1,4,7\}$ $\forall i,j,k,l \in \{1,...,9\}$ $((x \leq i,k \leq x+2) \land  (y \leq j,l \leq y+2) \land grid(i,j) = grid(k,l)) \rightarrow (i=k \land j=l) $
+
+New Grid Constraint:\\
+ $\forall x,y \in \{2,6\}$ $\forall i,j,k,l \in \{1,...,9\}$ $((x \leq i,k \leq x+2) \land  (y \leq j,l \leq y+2) \land grid(i,j) = grid(k,l)) \rightarrow (i=k \land j=l) $
+
+\subsection*{Sudoku solution}
+Added the second set of subgrids.
+\lstinputlisting[language=HaskellUlisses, firstline=213, lastline=214]{Week5NRC.hs}
+
+Adapted the $show$ function to show the new subgrids as the example in the assignment.
+\lstinputlisting[language=HaskellUlisses, firstline=220, lastline=268]{Week5NRC.hs}
+
+The function $bl2$ is the same as $bl$ but refers to the case of the new subgrids.
+\lstinputlisting[language=HaskellUlisses, firstline=289, lastline=290]{Week5NRC.hs}
+
+The conflicting values from the subgrids include the new blocks as well.
+\lstinputlisting[language=HaskellUlisses, firstline=292, lastline=302]{Week5NRC.hs}
+\lstinputlisting[language=HaskellUlisses, firstline=335, lastline=338]{Week5NRC.hs}
+
+A position is in the same block with another position either if they belong to the same standard subgrid or to the new ones defined by NRC.
+\lstinputlisting[language=HaskellUlisses, firstline=384, lastline=385]{Week5NRC.hs}
+
+Time spent: 2,5 hours
+
+\section*{Exercise 4}
+Instead of importing $Week5$ in the $RandomSudoku$, the module $Week5NRC$ is imported as a result $RandomSudoku$ will use the new rules and constraints from the NRC-Sudoku problem. 
+
+Time spent: 10 minutes
+
+\section*{Exercise 5}
+\subsection*{Test report}
+In order to test the NRC-Sudoku solver, three checks are used. The first check tests if the solution is a consistent NRC Sudoku ($testConsistent$), the second check tests if the solution is minimal ($testMinimal$), meaning it has a unique solution, and the last check is responsible for ensuring that the initialized values from the input sudoku are not changed in the output sudoku ($testValues$).
+So the $genRandomProblem$ function returns a list with the input sudoku and all its solutions. The function $testAll$ apply the three checks we described at the list returned from $genRandomProblem$ and returns $True$ if the sudoku problem is solved successfully.
+
+\lstinputlisting[language=HaskellUlisses, firstline=55, lastline=91]{Lab5.hs}
+Time spent: 2,5 hours
+
+\end{document}
