@@ -17,25 +17,21 @@ carmichael = [ (6*k+1)*(12*k+1)*(18*k+1) |
       isPrime (18*k+1) ]
 
 -- EXERCISE 1
-{-listBin x = 2^x : listBin (x+1)
-
 exM1 :: Integer -> Integer -> Integer -> Integer
-exM1 x 0 mn = 1
-exM1 x 1 mn = rem x mn
-exM1 x y mn = (exM1 x num mn) * (exM' x (y - num) mn 1) --mn
-    where num = f y 0
---  rem (x^num) mn does work but exM1 x num mn does not. with exM1 2 155 5 (antwoord is 3, geeft nu nog 8)
--- gaat fout bij exM1 2 3 5  
--- rem (2^2) 5 * rem (1^1) 5 = 8 -- laatste rem nodig?
- 
-exM' x y mn i | d /= y = exM' (rem (x^d) mn) y mn (i+1)
-              | otherwise = rem (x^d) mn
-    where d = 2^i -}
-{-
-f :: Integer -> Integer -> Integer
-f a b | elem a (takeWhile (<= a) (listBin 0))= b
-      | otherwise = f (a-1) (b+1) 
-      
+exM1 x 0 m = 1
+exM1 x y m | even y = quadr
+           | otherwise = multM x quadr m
+        where z = exM1 x (y `div` 2) m
+              quadr = multM z z m
+
+--Test if expM and exM1 give the same answer
+testEXMM :: Bool
+testEXMM = and [(testEXM a b c )| a <- [1..100], b <- [1..100], c <- [1..100]]
+
+testEXM :: Integer -> Integer -> Integer -> Bool
+testEXM a b c = exM1 a b c == expM a b c
+
+-- EXERCISE 2
 time :: IO t -> IO t
 time a = do
     start <- getCPUTime
@@ -45,13 +41,26 @@ time a = do
     printf "Computation time: %0.3f sec\n" (diff :: Double)
     return v
  
-jup = do
+timeEx x y m = do
     putStrLn "Starting..."
-    time $ exM1 1000 1025 3 `seq` return ()
-    putStrLn "Done." -}
+    putStrLn (show x)
+    putStrLn (show y)
+    putStrLn (show m)
+    time $ exM1 x y m `seq` return ()
+    time $ expM x y m `seq` return ()
+    putStrLn "Done." 
 
-    -- EXERCISE 3
-
+multT :: Integer -> IO ()
+multT 0 = return ()    
+multT n = do
+    x <- randomRIO (1000,1000000)
+    y <- randomRIO (1000,1000000)
+    m <- randomRIO (1000,1000000)
+    a <- timeEx x y m
+    b <- multT(n-1)
+    return ()
+  
+-- EXERCISE 3
 composites :: [Integer]
 composites = filter (>0) (sieveF [-2,-3..])
 
@@ -128,3 +137,22 @@ mersenne k = do
 randomPrime = do
     b <- (randomRIO (1,100)) 
     return (primes !! b)
+    
+-- ********NOT RELEVANT*********** --
+{- toBin x = reverse $ toBinary x
+
+toBinary :: Integer -> [ Integer ]
+toBinary 0 = [ 0 ]
+toBinary n = toBinary ( n `quot` 2 ) ++ [ n `rem` 2 ]
+
+exM1 :: Integer -> Integer -> Integer -> Integer
+exM1 x y m = rem (exM' x (toBinary y) m 0) m
+
+exM' _ [] _ _ = 1
+exM' x (y:ys) m c | y == 0 = exM' x ys m (c+1)
+                  | y == 1 = (exM'' x (2^c) m 0) * exM' x ys m (c+1)
+                 
+exM'' x y mn i | d < y = exM'' (rem (x^2) mn) y mn (i+1)
+               | otherwise = rem (x^2) mn
+        where d = 2^i-}
+-- ********************** 

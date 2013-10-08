@@ -88,16 +88,26 @@
 \date{\today}
 \maketitle
 
+\section*{Exercise 2}
+
+\lstinputlisting[language=HaskellUlisses, firstline=34, lastline=62]{Lab6.hs}
+\newpage
+By timing the two functions at calculating $ rem(x,y) m$ the following results show up:
+
+\includegraphics[width= 200px]{snippet}
+
+Where the first computation time is of exM1 and the second one of expM. exM1 is thus significanlty faster.
+
 \section*{Exercise 4}
 
-\lstinputlisting[language=HaskellUlisses, firstline=67, lastline=76]{Lab6.hs}
+\lstinputlisting[language=HaskellUlisses, firstline=74, lastline=85]{Lab6.hs}
 
 k = 1, k =2 and k = 3 give 4 as a prime number. When the value of k gets higher there are less fool primes found, this is because more different random numbers are chosen for \emph{a} which lowers the probability a composite number is considered a prime. 
 
 \vspace{0.5cm}
 \section*{Exercise 5}
 
-\lstinputlisting[language=HaskellUlisses, firstline=79, lastline=88]{Lab6.hs}
+\lstinputlisting[language=HaskellUlisses, firstline=87, lastline=98]{Lab6.hs}
 
 Carmichael numbers almost always pass the Fermat's primality check. That was also shown in the testing, most of the numbers passed our test.
  
@@ -105,11 +115,11 @@ The Carmichael numbers are of the form $ b^{n}\equiv b\pmod{n} $ for all integer
 \vspace{0.5cm}
 
 \section*{Exercise 6}
-\lstinputlisting[language=HaskellUlisses, firstline=91, lastline=100]{Lab6.hs}
+\lstinputlisting[language=HaskellUlisses, firstline=99, lastline=110]{Lab6.hs}
 
 Although some Carmichael numbers still pass the Miller-Rabin primality, these are significantly less than with Fermat's primality check. If we higher \emph{k}, meaning that we check with more random \emph{a's} we even find that Miller-Rabin doesn't consider any Carmichael numbers as prime numbers.
 
-\lstinputlisting[language=HaskellUlisses, firstline=103, lastline=111]{Lab6.hs}
+\lstinputlisting[language=HaskellUlisses, firstline=111, lastline=120]{Lab6.hs}
 \begin{verbatim}
 *Lab6> lengthCar 500 10
 "500"
@@ -121,7 +131,7 @@ Although some Carmichael numbers still pass the Miller-Rabin primality, these ar
 \end{verbatim}
 
 \section*{Exercise 7}
-\lstinputlisting[language=HaskellUlisses, firstline=115, lastline=131]{Lab6.hs}
+\lstinputlisting[language=HaskellUlisses, firstline=122, lastline=140]{Lab6.hs}
 
 The numbers that give True for the first argument in the tuple are indeed known Mersenne numbers as can be found on \url{http://en.wikipedia.org/wiki/Mersenne_prime}.
 
