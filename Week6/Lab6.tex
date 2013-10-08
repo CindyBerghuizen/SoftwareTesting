@@ -135,4 +135,9 @@ Although some Carmichael numbers still pass the Miller-Rabin primality, these ar
 
 The numbers that give True for the first argument in the tuple are indeed known Mersenne numbers as can be found on \url{http://en.wikipedia.org/wiki/Mersenne_prime}.
 
+\section*{Exercise 8}
+The function $find2PrimesBitL$ takes as input the bitlength of the prime numbers and the number of the iterations the functions is allowed to perform until it finds two different primes. If the function succeeds returns a tupple with the two different primes else returns $(0,0)$. Firstly, this function chooses a random number from $1$ to $2^{bitlength}-1$ to use it as offset inside the requested range $\{2^{bitlength},...,2^{bitlength+1}-1\}$. The function $findPrimeIn$ is  responsible for finding a prime in the given range by testing numbers with primeMR and $k = 40$. The parameter $k$ was chosen after searching the internet and experimenting with the functions from the previous exercises. If the prime is not found 0 is returned. 
+\lstinputlisting[language=HaskellUlisses, firstline=141, lastline=161]{Lab6.hs}
+
+
 \end{document}

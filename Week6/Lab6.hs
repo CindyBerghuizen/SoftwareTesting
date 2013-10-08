@@ -141,6 +141,7 @@ randomPrime = do
 --EXERCISE 8
 --First argument is the number of bits and the second is the number of tries it is going to has until it does finds two different primes
 --Selects two random numbers and uses findPrimesIn to find the next primes.
+find2PrimesBitL :: Int -> Int -> IO (Integer, Integer)
 find2PrimesBitL bits 0 = return (0,0)
 find2PrimesBitL bits tries = let range = 2^bits in do
   o1 <- randomRIO (1,range-1)
@@ -150,13 +151,15 @@ find2PrimesBitL bits tries = let range = 2^bits in do
   if ((p1 == p2) || (p1 == 0) || (p2 == 0)) then find2PrimesBitL bits (tries -1)
   else  return (p1,p2)
 
--- k = 40 error rate negligible according to ??? find reference not stack overflow
+-- k = 40 error rate negligible according to suggestion in stackoverflow //TODO change that with experimental values from our code
 -- Finds the next prime in the range {start,...,finish}, if it does not find a prime it returns zero.
-findPrimesIn start finish | (start >= finish) =  return 0 
-						  |otherwise = do
-											isPrimeV <- primeMR 40 start
-											if isPrimeV then return start 
-											else findPrimesIn (start+1) finish
+findPrimesIn :: Integer -> Integer -> IO Integer
+findPrimesIn start finish 
+  | (start >= finish) =  return 0 
+  |otherwise = do
+     isPrimeV <- primeMR 40 start
+     if isPrimeV then return start 
+	 else findPrimesIn (start+1) finish
     
 -- ********NOT RELEVANT*********** --
 {- toBin x = reverse $ toBinary x
