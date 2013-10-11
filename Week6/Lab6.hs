@@ -160,7 +160,17 @@ findPrimesIn start finish
      isPrimeV <- primeMR 40 start
      if isPrimeV then return start 
 	 else findPrimesIn (start+1) finish
-    
+
+-- Gets as an input a number and returns a tupple with the cipher text and the plain text
+rsa:: Integer -> IO (Integer, Integer)	 
+rsa message = do
+  (p,q) <- find2PrimesBitL 512 10
+  let (e,n) = rsa_public p q
+      (d,_) = rsa_private p q
+      cipher = rsa_encode (e,n) message
+      plain = rsa_decode (d,n) cipher
+  return (cipher, plain)
+	  
 -- ********NOT RELEVANT*********** --
 {- toBin x = reverse $ toBinary x
 
