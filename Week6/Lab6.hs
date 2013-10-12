@@ -165,11 +165,13 @@ findPrimesIn start finish
 rsa:: Integer -> IO (Integer, Integer)	 
 rsa message = do
   (p,q) <- find2PrimesBitL 512 10
-  let (e,n) = rsa_public p q
-      (d,_) = rsa_private p q
-      cipher = rsa_encode (e,n) message
-      plain = rsa_decode (d,n) cipher
-  return (cipher, plain)
+  if (p/=0 && p /= 0) then
+   let (e,n) = rsa_public p q
+       (d,_) = rsa_private p q
+       cipher = rsa_encode (e,n) message
+       plain = rsa_decode (d,n) cipher in
+   return (plain, cipher)
+  else error "Primes were not generated"
 	  
 -- ********NOT RELEVANT*********** --
 {- toBin x = reverse $ toBinary x

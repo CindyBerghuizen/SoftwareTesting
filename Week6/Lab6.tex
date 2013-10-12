@@ -139,5 +139,9 @@ The numbers that give True for the first argument in the tuple are indeed known 
 The function $find2PrimesBitL$ takes as input the bitlength of the prime numbers and the number of the iterations the functions is allowed to perform until it finds two different primes. If the function succeeds returns a tupple with the two different primes else returns $(0,0)$. Firstly, this function chooses a random number from $1$ to $2^{bitlength}-1$ to use it as offset inside the requested range $\{2^{bitlength},...,2^{bitlength+1}-1\}$. The function $findPrimeIn$ is  responsible for finding a prime in the given range by testing numbers with primeMR and $k = 40$. The parameter $k$ was chosen after searching the internet and experimenting with the functions from the previous exercises. If the prime is not found 0 is returned. 
 \lstinputlisting[language=HaskellUlisses, firstline=141, lastline=161]{Lab6.hs}
 
+The function $rsa$ which gets as input a message, after  generating 2 prime numbers with bitlength $512$ passes them to $rsa\_public$ which returns the public key and $rsa\_private$ which returns the private key. Then, the public key is given to $rsa\_encode$ along with the message which returns the encoded message. In order to decode the message the private key along with the cipher text are provided to $rsa\_decode$ and the plain text message is returned. The function  $rsa$ returns a tupple with the decoded message and its encoded version. If the 2 different primes needed were not generated, the function throws an error.
+
+\lstinputlisting[language=HaskellUlisses, firstline=164, lastline=174]{Lab6.hs}
+
 
 \end{document}
