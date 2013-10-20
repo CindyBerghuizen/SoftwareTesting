@@ -22,7 +22,7 @@ sElements (x:xs) ys =
 
 mergeSrtA :: Ord a => [a] -> [a]
 mergeSrtA = assert1 (\ _ -> sorted) $ assert1 (sElements) mergeSrt
-
+-- VVZ: aren't these two conditions equivalent?
 
 --EXERCISE 2
 
@@ -56,6 +56,8 @@ mergeSrtSplitA = assert1 (\ _ -> sorted) $ assert1 (sElements) mergeSrtSplit
 --Check2 	: Check if the values are the same as the original problem
 --Check3 	: Check if the Random solutions are minimal
 
+-- VVZ: rather obscure way to test it. Is that really convincing to you to see "True" appear on screen?
+-- VVZ: the output is usually that condensed if you run many test cases, but here you run it once...
 testAll :: IO Bool
 testAll = 	do 
 					x <- genRandomProblem
